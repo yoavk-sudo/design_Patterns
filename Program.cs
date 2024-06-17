@@ -22,10 +22,12 @@
                             .Build();
             Console.WriteLine(book.ToString());
             IPerson reader = PersonFactory.Create(person);
+            if (reader is not Reader) return;
             reader.Name = readerName;
             (reader as Reader).FavoriteGenre = favoriteGenre;
             (reader as Reader).FavoriteAuthor = favoriteAuthor;
-            Console.WriteLine($"Would {reader} enjoy {book.Title}? {(reader as Reader).WillEnjoyBook(book)}");
+            string enjoyment = (reader as Reader).WillEnjoyBook(book) ? "Yes" : "No";
+        Console.WriteLine($"Would {reader} enjoy {book.Title}? {enjoyment}");
         }
     }
 }
